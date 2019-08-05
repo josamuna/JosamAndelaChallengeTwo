@@ -3,8 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/insert_deal"
-        android:title="@string/insert_deal_menu"
+        android:id="@+id/save_deal"
+        android:title="@string/save_deal_menu"
         app:showAsAction="ifRoom|withText" />
-     />
+    <item
+        android:id="@+id/delete_deal"
+        android:title="@string/delete_deal_menu"
+        app:showAsAction="never|withText" />
 </menu>
