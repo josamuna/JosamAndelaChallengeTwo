@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,9 +28,10 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.ViewHolder> {
     private DatabaseReference mDatabaseReference;
     private ArrayList<TravelDeal> deals;
     private ChildEventListener mChildEventListener;
+    private ImageView imageView;
 
     public DealAdapter() {
-        FirebaseUtil.getFirebaseInstance(FirebaseUtil.CURRENT_PATH);
+//        FirebaseUtil.getFirebaseInstance(FirebaseUtil.CURRENT_PATH);
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
 
@@ -102,6 +105,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.ViewHolder> {
             mTxtTitle = (TextView) itemView.findViewById(R.id.text_title_deal);
             mTxtDescription = (TextView) itemView.findViewById(R.id.text_deal_description);
             mTxtPrice = (TextView) itemView.findViewById(R.id.text_deal_price);
+            imageView = (ImageView)itemView.findViewById(R.id.image_picture_load);
 
             itemView.setOnClickListener(this);
         }
@@ -110,6 +114,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.ViewHolder> {
             mTxtTitle.setText(td.getTitle());
             mTxtDescription.setText(td.getDescription());
             mTxtPrice.setText(td.getPrice());
+            showImage(td.getImageUrl());
         }
 
         @Override
@@ -122,6 +127,16 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.ViewHolder> {
             intent.putExtra(TravelDeal.TRAVELDEAL_EXTRA, dealSelected);
 
             view.getContext().startActivity(intent);
+        }
+
+        private void showImage(String imageUrl){
+            if(imageUrl == null && !imageUrl.isEmpty()){
+                Picasso.get()
+                        .load(imageUrl)
+                        .resize(160, 160)
+                        .centerCrop()
+                        .into(imageView);
+            }
         }
     }
 }

@@ -6,5 +6,9 @@
         android:id="@+id/insert_deal"
         android:title="@string/insert_deal_menu"
         app:showAsAction="ifRoom|withText" />
-     />
+    <item
+        android:id="@+id/logout_deal"
+        android:title="@string/logout_deal_menu"
+        app:showAsAction="never" />
+    />
 </menu>

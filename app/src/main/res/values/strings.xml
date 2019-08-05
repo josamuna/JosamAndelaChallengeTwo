@@ -9,4 +9,5 @@
     <string name="delete_deal_menu">Delete deal</string>
     <string name="text_btn_load_image">Select image</string>
     <string name="image_picture_load_description">Picture load for traveldeal</string>
+    <string name="logout_deal_menu">log out</string>
 </resources>
